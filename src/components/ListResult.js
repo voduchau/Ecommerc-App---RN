@@ -11,11 +11,14 @@ const ListResult = ({name,result,cate}) => {
     
     
     return (
-        <View>
+        <View style={styles.viewStyle   } >
             <Text style={styles.nameStyle}>
                 {getName}
             </Text>
             <FlatList 
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={styles.flatStyle}
                 data={a}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => {
@@ -28,6 +31,9 @@ const ListResult = ({name,result,cate}) => {
 
 const styles=StyleSheet.create({
     viewStyle:{
+    },
+    flatStyle:{
+        flexDirection:'row',
     },
     nameStyle:{
         fontSize:30,

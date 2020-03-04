@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet,ScrollView} from 'react-native';
 import InputComponent from '../components/InputComponent';
 import { FlatList } from 'react-native-gesture-handler';
 import ListResult from '../components/ListResult';
@@ -18,6 +18,7 @@ const HomeScreen = () => {
         await setResult(rs.businesses);
     }
     return (
+        <ScrollView>
         <View>
             <InputComponent GetApiSearch={GetApiSearch} />
             <Text style={{paddingLeft:10}}>We found {result.length} products</Text>
@@ -25,6 +26,7 @@ const HomeScreen = () => {
             <ListResult name='Price $$' cate='$$' result={result} />
             <ListResult name='Price $$$' cate='$$$' result={result} />
         </View>
+        </ScrollView>
     );
 };
 
