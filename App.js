@@ -12,16 +12,16 @@ const App = () => {
   return(
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen  name="HomeScreen" component={HomeScreen} options={{
+      <Tab.Screen name="HomeScreen" component={HomeScreen} options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-              <Icon name="home" size={30} color="#900" />
+          tabBarIcon: ({focused, color, size }) =>( 
+           focused ? <AntDesign name="home" size={30} color="blue" /> : <AntDesign name="home" size={30} color="gray" />
           ),
         }} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="profile" size={30} color="#900" />
+          tabBarIcon: ({focused, color, size }) => (
+            focused? <AntDesign name="profile" size={30} color="blue" /> : <AntDesign name="profile" size={30} color="gray" />
           ),
         }} />
       </Tab.Navigator>

@@ -6,7 +6,7 @@ const HomeScreen = () => {
     return (
         <View>
             <InputComponent />
-            <Text>This is HomeScreen</Text>
+            <Text>This is HomeScree2n</Text>
         </View>
     );
 };
