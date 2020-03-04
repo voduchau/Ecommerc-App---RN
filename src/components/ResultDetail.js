@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text,View, StyleSheet,Image,TouchableOpacity} from 'react-native';
 
-const ResultDetail = ({item}) =>{
+const ResultDetail = ({item,navigation}) =>{
     return (
         <TouchableOpacity
-            onPress={()=>console.log('click mee')}
+            onPress={()=>navigation.navigate('ItemDetail')}
         >
         <View style={styles.viewStyle}>
             <Image style={styles.imageStyle} source={{uri: item.image_url}} />

@@ -4,7 +4,8 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import StackHome from './src/screens/StackHome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { View,Text} from 'react-native';
 
@@ -15,7 +16,7 @@ const App = () => {
       <Tab.Navigator>
 
         {/* Home Screen */}
-        <Tab.Screen name="HomeScreen" component={HomeScreen} options={{
+        <Tab.Screen name="StackHome" component={StackHome} options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({focused, color, size }) =>( 
            focused ? <AntDesign name="home" size={30} color="blue" /> : <AntDesign name="home" size={30} color="gray" />

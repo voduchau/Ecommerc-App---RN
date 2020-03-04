@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet,ScrollView} from 'react-native';
 import InputComponent from '../components/InputComponent';
-import { FlatList } from 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
 import ListResult from '../components/ListResult';
-
-const HomeScreen = () => {
+import ItemDetail from './ItemDetail';
+const HomeScreen = ({navigation}) => {
     const [result,setResult] = useState([]);
 
     const GetApiSearch =async (term) => {   
@@ -20,11 +20,12 @@ const HomeScreen = () => {
     return (
         <ScrollView>
         <View>
+            {/* <RootStack.Navigator /> */}
             <InputComponent GetApiSearch={GetApiSearch} />
             <Text style={{paddingLeft:10}}>We found {result.length} products</Text>
-            <ListResult name='Price $' cate='$' result={result} />
-            <ListResult name='Price $$' cate='$$' result={result} />
-            <ListResult name='Price $$$' cate='$$$' result={result} />
+            <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
+            <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
+            <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
         </View>
         </ScrollView>
     );
