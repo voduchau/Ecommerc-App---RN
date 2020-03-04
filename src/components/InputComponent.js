@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { TextInput } from 'react-native-gesture-handler';
 
-const InputComponent = () => {
+const InputComponent = ({GetApiSearch}) => {
+    const [term,setTerm] = useState('');
+    console.log(term);
     return (
         <View style={styles.viewStyle}>
             <AntDesign style={styles.iconStyle} name="search1" size={30} color="black" />
-            <TextInput style={styles.inputStyle} placeholder={'Search'} />
+            <TextInput
+                autoCorrect={false}
+                style={styles.inputStyle} 
+                placeholder={'Search'} 
+                onChangeText={Text => setTerm(Text)}
+                onEndEditing={()=>GetApiSearch(term)}
+            />
         </View>
+
     );
 };
 
