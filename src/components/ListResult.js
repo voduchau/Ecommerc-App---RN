@@ -6,14 +6,14 @@ const ListResult = ({name,result,cate}) => {
     const a = result.filter((item)=>{
         return item.price==cate;
     });
-    let getName;
-    a.length >0 ? getName=name:null;
+    let getTitle;
+    a.length >0 ? getTitle=name:null;
     
     
     return (
         <View style={styles.viewStyle   } >
             <Text style={styles.nameStyle}>
-                {getName}
+                {getTitle}
             </Text>
             <FlatList 
                 horizontal
