@@ -13,12 +13,12 @@ const StackHome = () => {
             <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-                options={{ title: 'My app' }}
+                options={{ title: 'VentiCo.vn' }}
             />
             <Stack.Screen
                 name="ItemDetail"
                 component={ItemDetail}
-                initialParams={{ user: 'me' }}
+                options={{ title: 'Detail' }}
             />
         </Stack.Navigator>
     );

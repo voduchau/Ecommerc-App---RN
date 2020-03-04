@@ -2,6 +2,7 @@ import React from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
+import CartScreen from './src/screens/CartScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import StackHome from './src/screens/StackHome';
@@ -20,6 +21,14 @@ const App = () => {
           tabBarLabel: 'Home',
           tabBarIcon: ({focused, color, size }) =>( 
            focused ? <AntDesign name="home" size={30} color="blue" /> : <AntDesign name="home" size={30} color="gray" />
+          ),
+        }} />
+
+        {/* Cart Screen */}
+        <Tab.Screen name="CartScreen" component={CartScreen} options={{
+          tabBarLabel: 'Cart',
+          tabBarIcon: ({focused, color, size }) => (
+            focused? <AntDesign name="shoppingcart" size={30} color="blue" /> : <AntDesign name="shoppingcart" size={30} color="gray" />
           ),
         }} />
 
