@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, StyleSheet,ScrollView} from 'react-native';
 import InputComponent from '../components/InputComponent';
-import { createStackNavigator } from '@react-navigation/stack';
 import ListResult from '../components/ListResult';
 import ItemDetail from './ItemDetail';
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({route,navigation}) => {
+    const [countItem,setCountItem]= useState(0);
+    console.log(route,'routee');
+    const GetCount = ()=>{
+        if(route.params){
+            setCountItem(route.params.count);
+        }
+        else{
+            console.log('vao false');
+        }
+    }
+    useEffect(() => {
+        GetCount();
+    })
+    // console.log(count,'countt');
     const [result,setResult] = useState([]);
 
     const GetApiSearch =async (term) => {   
@@ -26,6 +39,7 @@ const HomeScreen = ({navigation}) => {
             <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
             <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
             <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+        <Text>Cart count: {countItem}</Text>
         </View>
         </ScrollView>
     );

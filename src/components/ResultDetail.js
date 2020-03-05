@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text,View, StyleSheet,Image,TouchableOpacity} from 'react-native';
 
-const ResultDetail = ({item,navigation}) =>{
+const ResultDetail = ({item,navigation,route}) =>{
     return (
         <TouchableOpacity
             onPress={()=>navigation.navigate('ItemDetail',{
@@ -12,6 +12,7 @@ const ResultDetail = ({item,navigation}) =>{
             <Image style={styles.imageStyle} source={{uri: item.image_url}} />
             <Text>{item.name}</Text>
         <Text>Rating: {item.rating}* - Review: {item.review_count}</Text>
+        {/* <Text>{count}</Text> */}
         </View>
         </TouchableOpacity>
 
