@@ -5,7 +5,6 @@ import { TextInput } from 'react-native-gesture-handler';
 
 const InputComponent = ({GetApiSearch}) => {
     const [term,setTerm] = useState('');
-    console.log(term);
     return (
         <View style={styles.viewStyle}>
             <AntDesign style={styles.iconStyle} name="search1" size={30} color="black" />

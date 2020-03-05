@@ -1,23 +1,21 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, StyleSheet,ScrollView} from 'react-native';
+import { View, Text, StyleSheet,ScrollView, Button} from 'react-native';
 import InputComponent from '../components/InputComponent';
 import ListResult from '../components/ListResult';
+import PayComponent from '../components/PayComponent';
 import ItemDetail from './ItemDetail';
 const HomeScreen = ({route,navigation}) => {
-    const [countItem,setCountItem]= useState(0);
-    console.log(route,'routee');
-    const GetCount = ()=>{
-        if(route.params){
-            setCountItem(route.params.count);
+    const [countItem,setCountItem]= useState([]);
+    const GetCount = (name,price,count)=>{
+        if(name){
+            setCountItem([...countItem,{name:name,price:price,count:count}]);
         }
         else{
-            console.log('vao false');
         }
     }
     useEffect(() => {
-        GetCount();
-    })
-    // console.log(count,'countt');
+        return GetCount();
+    },[])
     const [result,setResult] = useState([]);
 
     const GetApiSearch =async (term) => {   
@@ -36,10 +34,10 @@ const HomeScreen = ({route,navigation}) => {
             {/* <RootStack.Navigator /> */}
             <InputComponent GetApiSearch={GetApiSearch} />
             <Text style={{paddingLeft:10}}>We found {result.length} products</Text>
-            <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
-            <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
-            <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
-        <Text>Cart count: {countItem}</Text>
+            <ListResult GetCount={GetCount} navigation={navigation} name='Price $' cate='$' result={result} />
+            <ListResult GetCount={GetCount} navigation={navigation} name='Price $$' cate='$$' result={result} />
+            <ListResult GetCount={GetCount} navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+            <PayComponent navigation={navigation} item={countItem} CountItem={countItem.length} />
         </View>
         </ScrollView>
     );

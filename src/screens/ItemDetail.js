@@ -3,6 +3,7 @@ import {View,Text,StyleSheet, Image, Button, TouchableOpacity} from 'react-nativ
 import { CommonActions} from '@react-navigation/native';
 
 const ItemDetail = ({route, navigation,navigation: { goBack },navigation: { setParams }}) => {
+    const { GetCount } = route.params;
     const { item } = route.params;
     const [count,setCount] = useState(0);
 
@@ -17,14 +18,18 @@ const ItemDetail = ({route, navigation,navigation: { goBack },navigation: { setP
             <TouchableOpacity onPress={()=>setCount(count-1)}> 
                 <Text style={{fontSize:50}}>-</Text>
             </TouchableOpacity>
-            <Button title='Add to Cart' onPress={()=>navigation.dispatch(
+            <Button title='Add to Cart' onPress={()=>(
+                GetCount(item.name,item.price,count),
+                navigation.dispatch(
                 CommonActions.navigate({
                     name:'HomeScreen',
                     params:{
                         count:count,
+                        name:item.name,
+                        price:item.price,
                     }
                 })
-            )}
+            ))}
             />
         </View>
     );

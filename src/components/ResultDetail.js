@@ -1,11 +1,12 @@
 import React from 'react';
 import {Text,View, StyleSheet,Image,TouchableOpacity} from 'react-native';
 
-const ResultDetail = ({item,navigation,route}) =>{
+const ResultDetail = ({item,navigation,route,GetCount}) =>{
     return (
         <TouchableOpacity
             onPress={()=>navigation.navigate('ItemDetail',{
                 item:item,
+                GetCount:GetCount,
             })}
         >
         <View style={styles.viewStyle}>
