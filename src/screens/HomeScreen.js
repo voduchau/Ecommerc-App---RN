@@ -5,19 +5,8 @@ import ListResult from '../components/ListResult';
 import PayComponent from '../components/PayComponent';
 import ItemDetail from './ItemDetail';
 const HomeScreen = ({route,navigation}) => {
-    const [countItem,setCountItem]= useState([]);
-    const GetCount = (name,price,count)=>{
-        if(name){
-            setCountItem([...countItem,{name:name,price:price,count:count}]);
-        }
-        else{
-        }
-    }
-    useEffect(() => {
-        return GetCount();
-    },[])
     const [result,setResult] = useState([]);
-
+    const [itemCart,setItemCart] = useState([]);
     const GetApiSearch =async (term) => {   
         const data= await fetch(`https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent('new york')}&limit=${encodeURIComponent(30)}`, { 
             method: 'GET', 
@@ -28,16 +17,32 @@ const HomeScreen = ({route,navigation}) => {
         const rs=await data.json();
         await setResult(rs.businesses);
     }
+    useEffect(() => {
+        if (route.params?.itemId) {
+          setItemCart([...itemCart,{id:route.params.itemId,name:route.params.itemName,price:route.params.itemPrice,quantity:route.params.quantity}])
+        }
+        else
+        {
+        }
+      }, [route.params?.itemId]);
+      useEffect(() => {
+        if(route.params?.CountItemCart){
+            const CountItemCart=route.params?.CountItemCart;
+            if(itemCart.length!=0){
+                CountItemCart(itemCart.length);
+            }
+        }
+      }, [itemCart.length])
     return (
         <ScrollView>
         <View>
             {/* <RootStack.Navigator /> */}
             <InputComponent GetApiSearch={GetApiSearch} />
             <Text style={{paddingLeft:10}}>We found {result.length} products</Text>
-            <ListResult GetCount={GetCount} navigation={navigation} name='Price $' cate='$' result={result} />
-            <ListResult GetCount={GetCount} navigation={navigation} name='Price $$' cate='$$' result={result} />
-            <ListResult GetCount={GetCount} navigation={navigation} name='Price $$$' cate='$$$' result={result} />
-            <PayComponent navigation={navigation} item={countItem} CountItem={countItem.length} />
+            <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
+            <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
+            <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+            {/* <PayComponent navigation={navigation} changeCountItem={changeCountItem}  item={countItem} CountItem={countItem.length} /> */}
         </View>
         </ScrollView>
     );

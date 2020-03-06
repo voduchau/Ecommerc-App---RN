@@ -1,37 +1,30 @@
 import React, { useState, useReducer } from 'react';
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
-
-const reducer =(state,action)=>{
-    switch (action.type) {
-        case 'tang':
-            return state+1;
-        case 'giam':
-            return state-1;
-        default:
-            return state;
-    }
-
-}
-
-
-const CartDetail = ({item}) => {
-    const [state, dispatch] = useReducer(reducer,item.count)
+import {View,Text,StyleSheet,TouchableOpacity, addons} from 'react-native';
+const CartDetail = ({item,changeCountItem}) => {
+    console.log(changeCountItem,'changeCountItem trong cartdetailll');
+    const [countChange,setCountChange]= useState(item.count);
     return (
         <View style={styles.viewStyle}>
-            {state>0?
             <>
             <Text style={styles.nameStyle}>{item.name}</Text>
-            <TouchableOpacity onPress={()=>dispatch({type:'tang'})}>
+            <TouchableOpacity onPress={()=>{
+                changeCountItem(item.id,'tang');
+                setCountChange(countChange+1)
+            }
+                }>
                 <Text style={styles.countStyle}>+</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-                <Text style={styles.countStyle}>{state}</Text>
+                <Text style={styles.countStyle}>{countChange}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>dispatch({type:'giam'})}>
+            <TouchableOpacity onPress={()=>{
+                changeCountItem(item.id,'giam');
+                setCountChange(countChange-1)
+                }
+                }>
                 <Text style={styles.countStyle}>-</Text>
             </TouchableOpacity>
             </>
-            :null}
         </View>
     );
 }

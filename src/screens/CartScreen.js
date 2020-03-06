@@ -7,16 +7,22 @@ const CartScreen = ({navigation,route}) => {
     const [itemDetail,setItem] = useState([]);
     const GetCountCart = ()=>{
         if(route.params){
-            console.log(route.params.item,'vao true cart');
             setItem(route.params.item);
-            // setItem([...itemDetail,{name:name,price:price,count:count}]);
         }
         else{
             console.log('vao false cart');
         }
+    };
+    const CallBack = (id,type) =>{
+        console.log('vao call backkk');
+        if(route.params){
+            console.log(route.params.changeCountItem,'this is changeCountItem');
+            return route.params.changeCountItem(id,type);
+        }
     }
     useEffect(() => {
         GetCountCart();
+        CallBack();
     }, []);
     return (
         <View>
@@ -25,7 +31,7 @@ const CartScreen = ({navigation,route}) => {
                 data={itemDetail}
                 keyExtractor={item=>item.name}
                 renderItem={({item})=>{
-                return <CartDetail item={item} />
+                return <CartDetail changeCountItem={CallBack} item={item} />
                 }}
             />
         </View>

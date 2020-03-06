@@ -2,7 +2,7 @@ import React from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import ResultDetail from './ResultDetail';
-const ListResult = ({name,result,cate,navigation,GetCount}) => {
+const ListResult = ({name,result,cate,navigation}) => {
     const a = result.filter((item)=>{
         return item.price==cate;
     });
@@ -22,7 +22,7 @@ const ListResult = ({name,result,cate,navigation,GetCount}) => {
                 data={a}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => {
-                return <ResultDetail GetCount={GetCount} navigation={navigation} item={item} />
+                return <ResultDetail navigation={navigation} item={item} />
                 }}
             />
         </View>
