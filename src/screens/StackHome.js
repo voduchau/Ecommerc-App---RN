@@ -9,12 +9,12 @@ const StackHome = ({route,navigation,CountItemCart}) => {
     useEffect(() => {
         if (route.params?.CountItemCart) {
             
-          console.log(route.params?.CountItemCart,'coooooo ton tai params count trong stackhomee');
+        //   console.log(route.params?.CountItemCart,'coooooo ton tai params count trong stackhomee');
 
         }
         else
         {
-            console.log('khonggggg tai params count trong stackhomeee');
+            // console.log('khonggggg tai params count trong stackhomeee');
         }
       }, [route.params?.CountItemCart]);
     return (
