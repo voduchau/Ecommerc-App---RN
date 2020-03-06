@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
@@ -14,18 +14,31 @@ import { View,Text} from 'react-native';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  //state chưa item trong cart , được gọi từ homescreen về
+  const [item,setItem]= useState([]);
+
+
   const [count,setCount] = useState(0);
   // console.log(count,'ths is countd');
   // hàm đếm số lượng item từ ItemDetail truyền qua để show vào tab navigation
   const CountItemCart = (countItem) =>{
     setCount(countItem);
   }
+
+  //hàm lấy tất cả item từ Homescreen truyền lên
+  const GetItemToCart = (item2) =>{
+    setItem(item2);
+  }
+  useEffect(() => {
+    GetItemToCart();
+  },[])
+  console.log(item,'itemmmmmmmmmmmmmmmmmmmm');
   return(
     <NavigationContainer>
       <Tab.Navigator>
 
         {/* Home Screen */}
-        <Tab.Screen initialParams={{CountItemCart:CountItemCart}} name="StackHome" component={StackHome} i options={{
+        <Tab.Screen initialParams={{CountItemCart:CountItemCart,GetItemToCart:GetItemToCart}} name="StackHome" component={StackHome} i options={{
           tabBarLabel: 'Home',
 
           tabBarIcon: ({focused, color, size }) =>( 

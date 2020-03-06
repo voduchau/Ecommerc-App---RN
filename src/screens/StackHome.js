@@ -24,7 +24,7 @@ const StackHome = ({route,navigation,CountItemCart}) => {
         >
             <Stack.Screen
                 name="HomeScreen"
-                initialParams={{CountItemCart:route.params?.CountItemCart}}
+                initialParams={{CountItemCart:route.params?.CountItemCart,GetItemToCart:route.params.GetItemToCart}}
                 navigation={navigation}
                 component={HomeScreen}
                 options={{ title: 'VentiCo.vn', }}

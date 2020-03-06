@@ -53,6 +53,15 @@ const HomeScreen = ({route,navigation}) => {
             }
         }
       }, [itemCart.length]);
+
+    useEffect(() => {
+        if(route.params?.GetItemToCart){
+          const GetItemToCart=route.params?.GetItemToCart;
+          if(itemCart.length!=0){
+            GetItemToCart(itemCart);
+        }
+        }      
+    }, [itemCart.length,route.params.quantity])
       console.log(itemCart,'this is item cart');
     return (
         <ScrollView>
