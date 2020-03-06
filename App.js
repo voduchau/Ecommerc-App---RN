@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   const [count,setCount] = useState(0);
-  console.log(count,'ths is countd');
+  // console.log(count,'ths is countd');
   // hàm đếm số lượng item từ ItemDetail truyền qua để show vào tab navigation
   const CountItemCart = (countItem) =>{
     setCount(countItem);
