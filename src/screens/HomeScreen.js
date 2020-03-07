@@ -42,7 +42,7 @@ const HomeScreen = ({route,navigation}) => {
             :
             setItemCart([...itemCart,{id:route.params.itemId,name:route.params.itemName,price:route.params.itemPrice,quantity:route.params.quantity}])
         }
-      }, [route.params?.itemId,route.params?.quantity,route.params?.name]);
+      }, [route.params?.itemId,route.params?.quantity]);
 
 
     useEffect(() => {
@@ -62,7 +62,6 @@ const HomeScreen = ({route,navigation}) => {
         }
         }      
     }, [itemCart.length,route.params.quantity])
-      console.log(itemCart,'this is item cart');
     return (
         <ScrollView>
         <View>

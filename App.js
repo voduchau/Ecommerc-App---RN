@@ -16,9 +16,10 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   //state chưa item trong cart , được gọi từ homescreen về
   const [item,setItem]= useState([]);
-
+  // item = [{'id':1,'name':'food','quantity':12,'price':20}]
 
   const [count,setCount] = useState(0);
+  const [c,setC] = useState(9);
   // console.log(count,'ths is countd');
   // hàm đếm số lượng item từ ItemDetail truyền qua để show vào tab navigation
   const CountItemCart = (countItem) =>{
@@ -26,18 +27,34 @@ const App = () => {
   }
 
   //hàm lấy tất cả item từ Homescreen truyền lên
-  const GetItemToCart = (item2) =>{
-    setItem(item2);
+  const  GetItemToCart = (item2) =>{
+     setItem(item2);
   }
+
+  const passItem =()=>{
+    return item;
+  }
+
   useEffect(() => {
+    if(item === undefined || item.length == 0){
+        console.log('vao if');
+      }
+    else{
+      console.log('else');
+      
+      }
+  },[item]);
+
+   useEffect(() => {
     GetItemToCart();
   },[])
-  console.log(item,'itemmmmmmmmmmmmmmmmmmmm');
+console.log(item,'itemm goc');
+
   return(
     <NavigationContainer>
       <Tab.Navigator>
-
         {/* Home Screen */}
+        {/* {item === undefined || item.length == 0 ?item:passItem()} */}
         <Tab.Screen initialParams={{CountItemCart:CountItemCart,GetItemToCart:GetItemToCart}} name="StackHome" component={StackHome} i options={{
           tabBarLabel: 'Home',
 
@@ -47,7 +64,7 @@ const App = () => {
         }} />
 
         {/* Cart Screen */}
-        <Tab.Screen name="CartScreen" component={CartScreen} options={{
+        <Tab.Screen initialParams={{item:item,passItem:item}}  name="CartScreen" component={CartScreen} options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({focused, color, size }) => (
             focused? 
@@ -81,8 +98,8 @@ const App = () => {
             Hidden={count==0}
             />
                   ),
-                }} />
-
+              }      } />
+        
         {/* Profile Screen */}
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{
           tabBarLabel: 'Profile',
