@@ -35,19 +35,6 @@ const App = () => {
     return item;
   }
 
-  useEffect(() => {
-    if(item === undefined || item.length == 0){
-        console.log('vao if');
-      }
-    else{
-      console.log('else');
-      
-      }
-  },[item]);
-
-   useEffect(() => {
-    GetItemToCart();
-  },[])
 console.log(item,'itemm goc');
 
   return(
