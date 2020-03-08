@@ -17,7 +17,7 @@ const ItemDetail = ({route, navigation,navigation: { goBack },navigation: { setP
             <TouchableOpacity onPress={()=>setQuantity(quantity-1)}> 
                 <Text style={{fontSize:50}}>-</Text>
             </TouchableOpacity>
-            <Button title='Add to Cart' onPress={()=>navigation.navigate('HomeScreen',{
+            <Button title='Add to cart' onPress={()=>navigation.navigate('HomeScreen',{
                 quantity:quantity,
                 itemId:item.id,
                 itemName:item.name,
