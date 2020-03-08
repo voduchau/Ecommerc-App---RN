@@ -42,7 +42,7 @@ const HomeScreen = ({route,navigation}) => {
             :
             setItemCart([...itemCart,{id:route.params.itemId,name:route.params.itemName,price:route.params.itemPrice,quantity:route.params.quantity}])
         }
-      }, [route.params?.itemId,route.params?.quantity,route.params?.name]);
+      }, [route.params?.itemId,route.params?.quantity]);
 
 
     useEffect(() => {
@@ -53,7 +53,15 @@ const HomeScreen = ({route,navigation}) => {
             }
         }
       }, [itemCart.length]);
-      console.log(itemCart,'this is item cart');
+
+    useEffect(() => {
+        if(route.params?.GetItemToCart){
+          const GetItemToCart=route.params?.GetItemToCart;
+          if(itemCart.length!=0){
+            GetItemToCart(itemCart);
+        }
+        }      
+    }, [itemCart.length,route.params.quantity])
     return (
         <ScrollView>
         <View>

@@ -5,33 +5,23 @@ import CartDetail from '../components/CartDetail';
 
 const CartScreen = ({navigation,route}) => {
     const [itemDetail,setItem] = useState([]);
-    const GetCountCart = ()=>{
-        if(route.params){
-            setItem(route.params.item);
+    
+    useEffect(() => {
+        if(route.params?.passItem){
+            console.log(route.params?.passItem,'pasitemmm');
         }
         else{
-            console.log('vao false cart');
         }
-    };
-    const CallBack = (id,type) =>{
-        console.log('vao call backkk');
-        if(route.params){
-            console.log(route.params.changeCountItem,'this is changeCountItem');
-            return route.params.changeCountItem(id,type);
-        }
-    }
-    useEffect(() => {
-        GetCountCart();
-        CallBack();
-    }, []);
+    },[route.params?.passItem]);
     return (
         <View>
-            <Text>Payment</Text>
+            <Text>Cart Screen</Text>
             <FlatList
                 data={itemDetail}
-                keyExtractor={item=>item.name}
+                keyExtractor={item=>item.id}
                 renderItem={({item})=>{
-                return <CartDetail changeCountItem={CallBack} item={item} />
+                // return <CartDetail changeCountItem={CallBack} item={item} />
+                return <Text>{item.name}</Text>
                 }}
             />
         </View>

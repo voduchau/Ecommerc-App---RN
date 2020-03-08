@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
@@ -14,18 +14,48 @@ import { View,Text} from 'react-native';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  //state chưa item trong cart , được gọi từ homescreen về
+  const [item,setItem]= useState([]);
+  // item = [{'id':1,'name':'food','quantity':12,'price':20}]
+
   const [count,setCount] = useState(0);
+  const [c,setC] = useState(9);
   // console.log(count,'ths is countd');
   // hàm đếm số lượng item từ ItemDetail truyền qua để show vào tab navigation
   const CountItemCart = (countItem) =>{
     setCount(countItem);
   }
+
+  //hàm lấy tất cả item từ Homescreen truyền lên
+  const  GetItemToCart = (item2) =>{
+     setItem(item2);
+  }
+
+  const passItem =()=>{
+    return item;
+  }
+
+  useEffect(() => {
+    if(item === undefined || item.length == 0){
+        console.log('vao if');
+      }
+    else{
+      console.log('else');
+      
+      }
+  },[item]);
+
+   useEffect(() => {
+    GetItemToCart();
+  },[])
+console.log(item,'itemm goc');
+
   return(
     <NavigationContainer>
       <Tab.Navigator>
-
         {/* Home Screen */}
-        <Tab.Screen initialParams={{CountItemCart:CountItemCart}} name="StackHome" component={StackHome} i options={{
+        {/* {item === undefined || item.length == 0 ?item:passItem()} */}
+        <Tab.Screen initialParams={{CountItemCart:CountItemCart,GetItemToCart:GetItemToCart}} name="StackHome" component={StackHome} i options={{
           tabBarLabel: 'Home',
 
           tabBarIcon: ({focused, color, size }) =>( 
@@ -34,7 +64,7 @@ const App = () => {
         }} />
 
         {/* Cart Screen */}
-        <Tab.Screen name="CartScreen" component={CartScreen} options={{
+        <Tab.Screen initialParams={{item:item,passItem:item}}  name="CartScreen" component={CartScreen} options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({focused, color, size }) => (
             focused? 
@@ -68,8 +98,8 @@ const App = () => {
             Hidden={count==0}
             />
                   ),
-                }} />
-
+              }      } />
+        
         {/* Profile Screen */}
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{
           tabBarLabel: 'Profile',

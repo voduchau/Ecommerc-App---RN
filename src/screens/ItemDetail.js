@@ -21,7 +21,7 @@ const ItemDetail = ({route, navigation,navigation: { goBack },navigation: { setP
                 quantity:quantity,
                 itemId:item.id,
                 itemName:item.name,
-                itemPrice:item.price
+                itemPrice:item.price,
             })
                 // GetCount(item.name,item.price,count,item.id),
 
