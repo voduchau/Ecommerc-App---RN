@@ -3,13 +3,13 @@ import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import CartScreen from './src/screens/CartScreen';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import StackHome from './src/screens/StackHome';
 import IconBadge from 'react-native-icon-badge';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { View,Text} from 'react-native';
+import { View,Text,TouchableOpacity} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,11 +32,8 @@ const App = () => {
   }
 
   const passItem =()=>{
-    return item;
+    console.log('vao pass item');
   }
-
-console.log(item,'itemm goc');
-
   return(
     <NavigationContainer>
       <Tab.Navigator>
@@ -51,7 +48,7 @@ console.log(item,'itemm goc');
         }} />
 
         {/* Cart Screen */}
-        <Tab.Screen initialParams={{item:item,passItem:item}}  name="CartScreen" component={CartScreen} options={{
+        {/* <Tab.Screen initialParams={{item:item}}  name="CartScreen" component={CartScreen} options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({focused, color, size }) => (
             focused? 
@@ -85,7 +82,7 @@ console.log(item,'itemm goc');
             Hidden={count==0}
             />
                   ),
-              }      } />
+              }      } /> */}
         
         {/* Profile Screen */}
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{

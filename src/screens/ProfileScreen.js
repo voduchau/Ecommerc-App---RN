@@ -1,12 +1,23 @@
 import React from 'react';
+import IconBadge from 'react-native-icon-badge';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { View, Text, StyleSheet} from 'react-native';
 
 const ProfileScreen = ({ route, navigation }) => {
-    const { count } = route.params;
     return (
         <View>
-            <Text>This is Profile Screen</Text>
-        <Text>{count}</Text>
+                <IconBadge
+            MainElement={
+              <AntDesign name='shoppingcart' color='blue' size={30} />
+            }
+            BadgeElement={
+              <Text style={{color:'#FFFFFF'}}>{2}</Text>
+            }
+            IconBadgeStyle={
+              {width:10,
+              height:15,
+              backgroundColor: '#FF00EE'}
+            } />
         </View>
     );
 };

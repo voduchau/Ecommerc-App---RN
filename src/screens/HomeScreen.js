@@ -4,11 +4,32 @@ import InputComponent from '../components/InputComponent';
 import ListResult from '../components/ListResult';
 import PayComponent from '../components/PayComponent';
 import ItemDetail from './ItemDetail';
+import Cart from '../components/Cart';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const HomeScreen = ({route,navigation}) => {
     const [result,setResult] = useState([]);
     const [itemCart,setItemCart] = useState([]);
     const [err,setErr] = useState('');
 
+    const ChangeQuant = (id,quant,type) => {
+      if(type==1){
+        setItemCart(itemCart.map((item)=>{
+          if(item.id == id){
+            item.quantity=quant+1;
+          }
+          return item;
+        }))
+      }
+      else{
+        setItemCart(itemCart.map((item)=>{
+          if(item.id == id){
+            item.quantity=quant-1;
+          }
+          return item;
+        }))
+      }
+      
+    }
     
     const GetApiSearch =async (term) => {   
       try {
@@ -72,6 +93,7 @@ const HomeScreen = ({route,navigation}) => {
             <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
             <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
             <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+            <Cart navigation={navigation} ChangeQuant={ChangeQuant} itemCart={itemCart}/>
             {/* <PayComponent navigation={navigation} changeCountItem={changeCountItem}  item={countItem} CountItem={countItem.length} /> */}
         </View>
         </ScrollView>

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 import ItemDetail from './ItemDetail';
+import CartScreen from './CartScreen';
 import {View,Text,StyleSheet} from 'react-native';
 const Stack = createStackNavigator();
 const StackHome = ({route,navigation,CountItemCart}) => {
@@ -35,6 +36,12 @@ const StackHome = ({route,navigation,CountItemCart}) => {
                 navigation={navigation}
                 component={ItemDetail}
                 options={{ title: 'Detail' }}
+            />
+            <Stack.Screen
+                name="CartScreen"
+                navigation={navigation}
+                component={CartScreen}
+                options={{ title: 'CartScreen' }}
             />
         </Stack.Navigator>
     );
