@@ -5,7 +5,7 @@ import { View, Text, StyleSheet} from 'react-native';
 const SettingScreen = () => {
  const [state,setState] = useState(2);
     return (
-        <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center',}}>
+        <View style={{flex:1,backgroundColor:'red',flexDirection: 'row',alignItems: 'center',justifyContent: 'center',}}>
   <IconBadge
     MainElement={
       <View style={{backgroundColor:'#489EFE',

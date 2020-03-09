@@ -31,10 +31,11 @@ const HomeScreen = ({route,navigation}) => {
       
     }
     
-    const GetApiSearch =async (term) => {   
+    const GetApiSearch =async (term) => {
       try {
+        console.log(term,'this is term');
     const data= await fetch(`https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent('new york')}&limit=${encodeURIComponent(30)}`, { 
-        method: 'GET', 
+        method: 'GET',
         headers:{
           Authorization: 'Bearer mR52djBIP4H4k6agyuQ8qkl0KgNnoN_SmVG5iw8KoLaYhP25F-EP0g7mr61Umqf2VygwuHQjbu3Sh2-oEm-uxbXcfWanU7timV89rPsrSWDwn1KeaHKw2Bi4sqlUXnYx', 
         },
@@ -47,7 +48,11 @@ const HomeScreen = ({route,navigation}) => {
       error?setErr('something wrong'):null;
     }}
 
-    
+    // gọi lần đầu render homescreen
+    useEffect(() => {
+      GetApiSearch('checken');
+    }, [])
+
     useEffect(() => {
         if (route.params?.itemId) {
          ( itemCart.filter((item)=>{
@@ -84,19 +89,19 @@ const HomeScreen = ({route,navigation}) => {
         }      
     }, [itemCart.length,route.params.quantity])
     return (
-        <ScrollView>
-        <View>
+        <View style={{flex:1}}>
             {/* <RootStack.Navigator /> */}
+            <ScrollView>
             <InputComponent GetApiSearch={GetApiSearch} />
             {err!='' ? <Text>{err}</Text>:null}
             <Text style={{paddingLeft:10}}>We found {result.length} products</Text>
             <ListResult navigation={navigation} name='Price $' cate='$' result={result} />
             <ListResult navigation={navigation} name='Price $$' cate='$$' result={result} />
             <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+            <ListResult navigation={navigation} name='Price $$$' cate='$$$' result={result} />
+            </ScrollView>
             <Cart navigation={navigation} ChangeQuant={ChangeQuant} itemCart={itemCart}/>
-            {/* <PayComponent navigation={navigation} changeCountItem={changeCountItem}  item={countItem} CountItem={countItem.length} /> */}
         </View>
-        </ScrollView>
     );
 };
 

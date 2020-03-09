@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const Cart = ({itemCart,navigation,ChangeQuant}) => {
     console.log(itemCart,'item cartt');
     return (
-        <View style={{bottom:0,right:0,flexDirection: 'row',position:'absolute',alignItems: 'center',justifyContent: 'flex-end',}}>
+        <View style={{bottom:5,right:5,flexDirection: 'row',position:'absolute',alignItems: 'center',justifyContent: 'flex-end',}}>
             <TouchableOpacity onPress={()=>navigation.navigate('CartScreen',
                             {
                                 item:itemCart,
@@ -17,22 +17,23 @@ const Cart = ({itemCart,navigation,ChangeQuant}) => {
                 <IconBadge
                 MainElement={
             <View style={{
-                borderWidth:2,
-                borderColor:'gray',
+                borderWidth:3,
+                borderColor:'blue',
                 borderRadius:10,
                 width:60,
                 height:60,
-                margin:6
+                margin:6,
+                backgroundColor:'yellow'
             }}>
-                <AntDesign name='shoppingcart' color='gray' size={50} />
+                <AntDesign name='shoppingcart' color='blue' size={50} />
             </View>
             }
             BadgeElement={
             <Text style={{color:'#FFFFFF'}}>{itemCart.length}</Text>
             }
             IconBadgeStyle={
-            {width:23,
-            height:23,
+            {width:25,
+            height:25,
             backgroundColor: '#FF00EE'}
             }
             Hidden={itemCart.length==0}
