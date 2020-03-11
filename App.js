@@ -10,6 +10,9 @@ import IconBadge from 'react-native-icon-badge';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { View,Text,TouchableOpacity} from 'react-native';
+//import login screen
+import LoginScreen from './src/screens/LoginScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -97,6 +100,22 @@ const App = () => {
           tabBarLabel: 'Setting Screen',
           tabBarIcon: ({focused, color, size }) => (
             focused? <AntDesign name="setting" size={30} color="blue" /> : <AntDesign name="setting" size={30} color="gray" />
+          ),
+        }} />
+
+        {/* Login Screen */}
+        <Tab.Screen name="LoginScreen" component={LoginScreen} options={{
+          tabBarLabel: 'LoginScreen Screen',
+          tabBarIcon: ({focused, color, size }) => (
+            focused? <AntDesign name="login" size={30} color="blue" /> : <AntDesign name="login" size={30} color="gray" />
+          ),
+        }} />
+
+        {/* SignUp Screen */}
+        <Tab.Screen name="SignUpScreen" component={SignUpScreen} options={{
+          tabBarLabel: 'SignUpScreen Screen',
+          tabBarIcon: ({focused, color, size }) => (
+            focused? <AntDesign name="registered" size={30} color="blue" /> : <AntDesign name="registered" size={30} color="gray" />
           ),
         }} />
         
