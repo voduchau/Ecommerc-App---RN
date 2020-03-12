@@ -6,12 +6,13 @@ const SignUpScreen = ({navigation}) => {
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [err,setErr] = useState('');
 
     handleSignUp = () => {
         Firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then(() => navigation.navigate('LoginScreen'))
-            .catch(error => console.log(error))
+            .catch(error => setErr(error))
     }
     console.log(email,'emaillll');
         return (
@@ -36,7 +37,8 @@ const SignUpScreen = ({navigation}) => {
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>{ console.log('xx');handleSignUp()}} >
+                <Text>{err}</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>handleSignUp()} >
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
             </View>

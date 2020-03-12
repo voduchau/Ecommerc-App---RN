@@ -1,29 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Firebase from '../../config/Firebase';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
+    //email password
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+
+    //show nếu có lỗi đăng nhập
+    const [err,setErr] = useState('');
+
+    //check login hay chưa
+    const [status,setStatus] = useState(false);
+
+    // xử lý login
+    const handleLogin = ()=>{
+        Firebase.auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(()=>{
+                    setStatus(true);
+                    navigation.navigate('HomeScreen')
+                })
+                .catch(error => setErr(error))
+    }
         return (
             <View style={styles.container}>
+                {status ?
+                <Text>You are Login</Text>
+                :
+                <>
                 <TextInput
                     style={styles.inputBox}
                     value={email}
-                    onChangeText={email => setEmail({ email })}
+                    onChangeText={email => setEmail(email)}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.inputBox}
                     value={password}
-                    onChangeText={password => setPassword({ password })}
+                    onChangeText={password => setPassword(password)}
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-                <TouchableOpacity style={styles.button}>
+                <Text>{err.length != 0 ? err.message:null}</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>handleLogin()} >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
-                <Button title="Don't have an account yet? Sign up" />
+                <Button title="Don't have an account yet? Sign up" onPress={()=>navigation.navigate('SignUpScreen')} />
+                </>
+                }
             </View>
         )
     }
