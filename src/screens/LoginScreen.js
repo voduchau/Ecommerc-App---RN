@@ -53,8 +53,7 @@ const LoginScreen = ({navigation}) => {
                 <>{loading ? null :
                 (user ?
                 <>
-                <Text>You are Login</Text>
-                <Text>{user.email}</Text>
+                <Text style={{fontSize:25,fontWeight:'bold',color:'green'}}>Welcome {user.email}</Text>
                 <Button title="change password" onPress ={()=>navigation.navigate('UpdatePassword')} />
                 <Button title="log out" onPress = {()=>SignOut()} />
                 </>
