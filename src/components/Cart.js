@@ -5,7 +5,6 @@ import { View, Text, StyleSheet} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Cart = ({itemCart,navigation,ChangeQuant}) => {
-    console.log(itemCart,'item cartt');
     return (
         <View style={{bottom:5,right:5,flexDirection: 'row',position:'absolute',alignItems: 'center',justifyContent: 'flex-end',}}>
             <TouchableOpacity onPress={()=>navigation.navigate('CartScreen',

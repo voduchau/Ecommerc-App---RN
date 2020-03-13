@@ -33,7 +33,6 @@ const HomeScreen = ({route,navigation}) => {
     
     const GetApiSearch =async (term) => {
       try {
-        console.log(term,'this is term');
     const data= await fetch(`https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent('new york')}&limit=${encodeURIComponent(30)}`, { 
         method: 'GET',
         headers:{
