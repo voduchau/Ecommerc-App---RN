@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Firebase from '../../config/Firebase';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
 
@@ -7,26 +7,57 @@ const LoginScreen = ({navigation}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
+    //profile user login
+    const [profile,setProfile] = useState([]);
+
     //show nếu có lỗi đăng nhập
     const [err,setErr] = useState('');
 
-    //check login hay chưa
-    const [status,setStatus] = useState(false);
+    const [user,setUser] = useState(null);
+    const [loading,setLoading] = useState(true);
+
 
     // xử lý login
     const handleLogin = ()=>{
         Firebase.auth()
                 .signInWithEmailAndPassword(email, password)
                 .then(()=>{
-                    setStatus(true);
-                    navigation.navigate('HomeScreen')
+                    navigation.navigate('LoginScreen')
                 })
                 .catch(error => setErr(error))
     }
+    //log out user
+    const SignOut = async ()=>{
+        try {
+            await Firebase.auth().signOut();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    //check login ?
+    Firebase.auth().onAuthStateChanged( (user)=> {
+        if (user) {
+          // User is signed in.
+           setUser(user);
+        } else {
+          // No user is signed in.
+          setUser(null);
+        }
+        if(loading){
+            setLoading(false);
+        }
+      });
+      
         return (
             <View style={styles.container}>
-                {status ?
+                <>{loading ? null :
+                (user ?
+                <>
                 <Text>You are Login</Text>
+                <Text>{user.email}</Text>
+                <Button title="change password" onPress ={()=>navigation.navigate('UpdatePassword')} />
+                <Button title="log out" onPress = {()=>SignOut()} />
+                </>
                 :
                 <>
                 <TextInput
@@ -49,7 +80,10 @@ const LoginScreen = ({navigation}) => {
                 </TouchableOpacity>
                 <Button title="Don't have an account yet? Sign up" onPress={()=>navigation.navigate('SignUpScreen')} />
                 </>
-                }
+                )
+                }</>
+                
+            
             </View>
         )
     }

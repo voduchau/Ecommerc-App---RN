@@ -1,7 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import {View,Text,StyleSheet,TouchableOpacity, addons} from 'react-native';
 const CartDetail = ({item,changeCountItem}) => {
-    console.log(changeCountItem,'changeCountItem trong cartdetailll');
     const [countChange,setCountChange]= useState(item.count);
     return (
         <View style={styles.viewStyle}>

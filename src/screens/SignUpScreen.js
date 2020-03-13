@@ -12,7 +12,7 @@ const SignUpScreen = ({navigation}) => {
         Firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then(() => navigation.navigate('LoginScreen'))
-            .catch(error => setErr(error))
+            .catch(error => setErr(error.code))
     }
     console.log(email,'emaillll');
         return (

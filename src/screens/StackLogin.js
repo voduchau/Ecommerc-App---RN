@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {View,Text,StyleSheet} from 'react-native';
 import LoginScreen from './LoginScreen';
 import SignUpScreen from './SignUpScreen';
+import UpdatePassword from './UpdatePassword';
 const Stack = createStackNavigator();
 const StackLogin = ({navigation}) => {
     return (
@@ -22,6 +23,12 @@ const StackLogin = ({navigation}) => {
                 navigation={navigation}
                 component={SignUpScreen}
                 options={{ title: 'SignUpScreen' }}
+            />
+            <Stack.Screen
+                name="UpdatePassword"
+                navigation={navigation}
+                component={UpdatePassword}
+                options={{ title: 'UpdatePassword' }}
             />
         </Stack.Navigator>
     );
