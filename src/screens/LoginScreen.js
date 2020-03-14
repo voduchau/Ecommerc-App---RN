@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import Firebase from '../../config/Firebase';
+import Login from '../components/Login';
+import ForgotPass from './ForgotPass';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
 
 const LoginScreen = ({navigation}) => {
@@ -26,14 +28,9 @@ const LoginScreen = ({navigation}) => {
                 })
                 .catch(error => setErr(error))
     }
-    //log out user
-    const SignOut = async ()=>{
-        try {
-            await Firebase.auth().signOut();
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    
+    // console.log(Firebase.auth().currentUser,'user123');
+    // console.log(Firebase.auth().currentUser.emailVerified,'user123');
     //check login ?
     Firebase.auth().onAuthStateChanged( (user)=> {
         if (user) {
@@ -47,15 +44,13 @@ const LoginScreen = ({navigation}) => {
             setLoading(false);
         }
       });
-      
+     
         return (
             <View style={styles.container}>
                 <>{loading ? null :
                 (user ?
                 <>
-                <Text style={{fontSize:25,fontWeight:'bold',color:'green'}}>Welcome {user.email}</Text>
-                <Button title="change password" onPress ={()=>navigation.navigate('UpdatePassword')} />
-                <Button title="log out" onPress = {()=>SignOut()} />
+               <Login user={user} navigation={navigation} />
                 </>
                 :
                 <>
@@ -73,6 +68,9 @@ const LoginScreen = ({navigation}) => {
                     placeholder='Password'
                     secureTextEntry={true}
                 />
+                <TouchableOpacity onPress={()=>navigation.navigate('ForgotPass')}>
+                    <Text style={{color:'blue',borderBottomWidth:1,borderBottomColor:'blue'}} >forgot password ?</Text>
+                </TouchableOpacity>
                 <Text>{err.length != 0 ? err.message:null}</Text>
                 <TouchableOpacity style={styles.button} onPress={()=>handleLogin()} >
                     <Text style={styles.buttonText}>Login</Text>

@@ -8,11 +8,18 @@ const SignUpScreen = ({navigation}) => {
     const [password,setPassword] = useState('');
     const [err,setErr] = useState('');
 
-    handleSignUp = () => {
-        Firebase.auth()
+    handleSignUp =async () => {
+       await Firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then(() => navigation.navigate('LoginScreen'))
             .catch(error => setErr(error.code))
+        let user=Firebase.auth().currentUser;
+        user.sendEmailVerification().then(function() {
+                // Email sent.
+                console.log('send email');
+        }).catch(function(error) {
+                // An error happened.
+        });
     }
     console.log(email,'emaillll');
         return (
